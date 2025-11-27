@@ -92,7 +92,9 @@ def get_metric():
 
 @app_api.route('/telemetry/ListMetrics', methods=['GET'])
 def list_metrics():
-    """Fetch a list of metric values for all switches/servers, grouped by metric"""
+    """
+    Fetch a list of metric values for all switches/servers, grouped by metric
+    """
     start_time = time.time()
     api_stats['list_metrics_requests'] += 1
 
@@ -156,7 +158,9 @@ def list_metrics():
 
 @app_api.route('/counters', methods=['GET'])
 def get_counters():
-    """Export telemetry data as CSV"""
+    """
+    Export telemetry data as CSV
+    """
     start_time = time.time()
     api_stats['counters_requests'] += 1
 
@@ -272,9 +276,34 @@ def get_counters():
         return jsonify({'error': str(e)}), 500
 
 
-@app_api.route('/stats', methods=['GET'])
+@app_api.route('/stats', methods=['GET'])@app_api.route('/stats', methods=['GET'])
 def get_api_stats():
-    """Get API performance statistics"""
+    """Return API performance statistics as JSON.
+
+    The response includes per-endpoint totals and average latencies (in milliseconds),
+    computed from the cumulative timing and request counters stored in the module-level
+    `api_stats` dictionary.
+
+    Response format:
+    {
+        "GetMetric": {
+            "total_requests": int,
+            "avg_latency_ms": float
+        },
+        "ListMetrics": {
+            "total_requests": int,
+            "avg_latency_ms": float
+        },
+        "Counters": {
+            "total_requests": int,
+            "avg_latency_ms": float
+        },
+        "total_errors": int
+    }
+
+    Note: Average latencies are 0 when the corresponding request count is 0 to avoid
+    division-by-zero.
+    """
     stats = {
         'GetMetric': {
             'total_requests': api_stats['get_metric_requests'],
@@ -294,6 +323,7 @@ def get_api_stats():
         'total_errors': api_stats['errors']
     }
     return jsonify(stats)
+
 
 
 def run_on_port(port):
