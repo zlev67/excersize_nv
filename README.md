@@ -43,7 +43,7 @@ The ingest_server is running on port 9002; you can use the following URL to acce
 The following API is implemented in the ingest_server:
 
 * POST /ingest getting the JSON form at data with the following structure:
-* data = {'metric_name': <metric_name>,'server_name': <server>,'value': <value>,'unit': <unit>,'timestamp': <timestamp>}
+* data = {'metric_name': <_metric_name_>,'server_name': <_server_name_>, 'value': <_val_>, 'unit': <_unit_>,'timestamp': <_timestamp_>}
 
 * GET /stats - returns statistics on executed session. This API is working with port 9002; The url will be http://127.0.0.1:9002/stats
 
@@ -92,7 +92,7 @@ example from  "run_all.cmd":
 Both applications (ingest_server and api_server) are using logging module to log the events. Logs are printed on terminals
 Log can be used for debugging and monitoring purposes.
 
-Example of Log for api_server:<br>
+## Example of Log for api_server:
 2025-11-27 17:54:04,494 - api_server - INFO - GetMetric: cpu_usage_percent (0.0009s) <br>
 2025-11-27 17:54:04,494 - werkzeug - INFO - 127.0.0.1 - - [27/Nov/2025 17:54:04] "GET /telemetry/GetMetric?name=cpu_usage_percent HTTP/1.1" 200 - <br>
 2025-11-27 17:54:05,520 - api_server - INFO - GetMetric: error_count (0.0017s)<br>
@@ -113,7 +113,7 @@ Example of Log for api_server:<br>
 2025-11-27 17:54:14,832 - werkzeug - INFO - 127.0.0.1 - - [27/Nov/2025 17:54:14] "GET /counters HTTP/1.1" 200 -<br>
 2025-11-27 17:54:16,840 - werkzeug - INFO - 127.0.0.1 - - [27/Nov/2025 17:54:16] "GET /stats HTTP/1.1" 200 -<br>
 
-Example of log for ingest_server:
+## Example of log for ingest_server:
 2025-11-27 17:54:23,038 - ingest_server - INFO - Ingested: server-01 - cpu_usage_percent = 86.31 (0.0923s)<br>
 2025-11-27 17:54:23,038 - werkzeug - INFO - 127.0.0.1 - - [27/Nov/2025 17:54:23] "POST /ingest HTTP/1.1" 201 -<br>
 2025-11-27 17:54:23,140 - ingest_server - INFO - Ingested: server-01 - memory_usage_percent = 60.1 (0.0842s)<br>
