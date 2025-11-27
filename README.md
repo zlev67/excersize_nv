@@ -136,7 +136,7 @@ The data_generator is a regular application, which is generating the random data
 The ingest_server is receiving the data and storing it into the database.
 User can seng GET requests to api_server to retrieve data from the database.
 
-#Application limitation and way to solve them
+# Application limitation and way to solve them
 (Note, the listed limitation are AFTER moving to recommended  WSGI server instead of FLASK debug server)
 * The applications are using SQLite as a database, it is not suitable for high-load production environments; 
 * As a "database in a file", it is also not compatible with
